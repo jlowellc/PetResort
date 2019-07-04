@@ -56,13 +56,13 @@ namespace ThePetResort.UI
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "183879445465458",
-               appSecret: "1a449b71cb8bfd9390e8745b1511bb94");
+               appId: "1838794sadasdasdasd65458",
+               appSecret: "1asdfsdfsdf32122.dsdsaf.1cb8bfd9390e8745132151511bb94");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "1099240712635-e6mfrp55ncf3nmfcmtmkobp6fec8ada2.apps.googleusercontent.com",
-                ClientSecret = "_q-kWIFoixY0J8VzVpLTyO3F"
+                ClientId = "1099240712635-e6mfrp55nasdasdasdasd63514bvhbvfec8ada2.apps.googleusercontent.com",
+                ClientSecret = "_q-kWIsdfsfdsf321351651VzVpLTyO3F"
             });
         }
     }
