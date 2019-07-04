@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="856c675385894575bb49aaca43c54324" Name="Diagram1">
+        <EntityTypeShape EntityType="PetResortModel.Owner" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.PetOwner" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.Pet" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.ReservationLimit" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.Reservation" Width="1.5" PointX="5.25" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.ResortLocation" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PetResortModel.Type" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <AssociationConnector Association="PetResortModel.FK_PetOwners_Owners" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_PetOwners_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_Pets_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_Reservations_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_ReservationLimits_ResortLocations" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_ReservationLimits_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="PetResortModel.FK_Reservations_ResortLocations" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

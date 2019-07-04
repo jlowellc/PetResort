@@ -1,0 +1,509 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PetResortModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Owners">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateCreated" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PetOwners">
+          <Key>
+            <PropertyRef Name="PetOwnerID" />
+          </Key>
+          <Property Name="PetOwnerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OwnerID" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="PetID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="PetPhoto" Type="nvarchar" MaxLength="50" />
+          <Property Name="SpecialNotes" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsVIP" Type="bit" Nullable="false" />
+          <Property Name="DateAdded" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReservationLimits">
+          <Key>
+            <PropertyRef Name="ReservationLimitID" />
+          </Key>
+          <Property Name="ReservationLimitID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResortLocationID" Type="int" Nullable="false" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="Limit" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResortLocationID" Type="int" Nullable="false" />
+          <Property Name="PetID" Type="int" Nullable="false" />
+          <Property Name="ReservationDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResortLocations">
+          <Key>
+            <PropertyRef Name="ResortLocationID" />
+          </Key>
+          <Property Name="ResortLocationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResortName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Types">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsExotic" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PetOwners_Owners">
+          <End Role="Owners" Type="Self.Owners" Multiplicity="1" />
+          <End Role="PetOwners" Type="Self.PetOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="OwnerID" />
+            </Principal>
+            <Dependent Role="PetOwners">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PetOwners_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="PetOwners" Type="Self.PetOwners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="PetOwners">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationLimits_ResortLocations">
+          <End Role="ResortLocations" Type="Self.ResortLocations" Multiplicity="1" />
+          <End Role="ReservationLimits" Type="Self.ReservationLimits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResortLocations">
+              <PropertyRef Name="ResortLocationID" />
+            </Principal>
+            <Dependent Role="ReservationLimits">
+              <PropertyRef Name="ResortLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationLimits_Types">
+          <End Role="Types" Type="Self.Types" Multiplicity="1" />
+          <End Role="ReservationLimits" Type="Self.ReservationLimits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="ReservationLimits">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_ResortLocations">
+          <End Role="ResortLocations" Type="Self.ResortLocations" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResortLocations">
+              <PropertyRef Name="ResortLocationID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="ResortLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetResortModelStoreContainer">
+          <EntitySet Name="Owners" EntityType="Self.Owners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PetOwners" EntityType="Self.PetOwners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservationLimits" EntityType="Self.ReservationLimits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResortLocations" EntityType="Self.ResortLocations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Types" EntityType="Self.Types" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PetOwners_Owners" Association="Self.FK_PetOwners_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="PetOwners" EntitySet="PetOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PetOwners_Pets" Association="Self.FK_PetOwners_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="PetOwners" EntitySet="PetOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Types" Association="Self.FK_Pets_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationLimits_ResortLocations" Association="Self.FK_ReservationLimits_ResortLocations">
+            <End Role="ResortLocations" EntitySet="ResortLocations" />
+            <End Role="ReservationLimits" EntitySet="ReservationLimits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationLimits_Types" Association="Self.FK_ReservationLimits_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="ReservationLimits" EntitySet="ReservationLimits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_Pets" Association="Self.FK_Reservations_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_ResortLocations" Association="Self.FK_Reservations_ResortLocations">
+            <End Role="ResortLocations" EntitySet="ResortLocations" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PetResortModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="OwnerID" />
+          </Key>
+          <Property Name="OwnerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="PetOwners" Relationship="Self.FK_PetOwners_Owners" FromRole="Owners" ToRole="PetOwners" />
+        </EntityType>
+        <EntityType Name="PetOwner">
+          <Key>
+            <PropertyRef Name="PetOwnerID" />
+          </Key>
+          <Property Name="PetOwnerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OwnerID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PetID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_PetOwners_Owners" FromRole="PetOwners" ToRole="Owners" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_PetOwners_Pets" FromRole="PetOwners" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Pet">
+          <Key>
+            <PropertyRef Name="PetID" />
+          </Key>
+          <Property Name="PetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="PetPhoto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SpecialNotes" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsVIP" Type="Boolean" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="PetOwners" Relationship="Self.FK_PetOwners_Pets" FromRole="Pets" ToRole="PetOwners" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_Pets_Types" FromRole="Pets" ToRole="Types" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_Pets" FromRole="Pets" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="ReservationLimit">
+          <Key>
+            <PropertyRef Name="ReservationLimitID" />
+          </Key>
+          <Property Name="ReservationLimitID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResortLocationID" Type="Int32" Nullable="false" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <Property Name="Limit" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="ResortLocation" Relationship="Self.FK_ReservationLimits_ResortLocations" FromRole="ReservationLimits" ToRole="ResortLocations" />
+          <NavigationProperty Name="Type" Relationship="Self.FK_ReservationLimits_Types" FromRole="ReservationLimits" ToRole="Types" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationID" />
+          </Key>
+          <Property Name="ReservationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResortLocationID" Type="Int32" Nullable="false" />
+          <Property Name="PetID" Type="Int32" Nullable="false" />
+          <Property Name="ReservationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Pet" Relationship="Self.FK_Reservations_Pets" FromRole="Reservations" ToRole="Pets" />
+          <NavigationProperty Name="ResortLocation" Relationship="Self.FK_Reservations_ResortLocations" FromRole="Reservations" ToRole="ResortLocations" />
+        </EntityType>
+        <EntityType Name="ResortLocation">
+          <Key>
+            <PropertyRef Name="ResortLocationID" />
+          </Key>
+          <Property Name="ResortLocationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResortName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ReservationLimits" Relationship="Self.FK_ReservationLimits_ResortLocations" FromRole="ResortLocations" ToRole="ReservationLimits" />
+          <NavigationProperty Name="Reservations" Relationship="Self.FK_Reservations_ResortLocations" FromRole="ResortLocations" ToRole="Reservations" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeID" />
+          </Key>
+          <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsExotic" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Types" FromRole="Types" ToRole="Pets" />
+          <NavigationProperty Name="ReservationLimits" Relationship="Self.FK_ReservationLimits_Types" FromRole="Types" ToRole="ReservationLimits" />
+        </EntityType>
+        <Association Name="FK_PetOwners_Owners">
+          <End Role="Owners" Type="Self.Owner" Multiplicity="1" />
+          <End Role="PetOwners" Type="Self.PetOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owners">
+              <PropertyRef Name="OwnerID" />
+            </Principal>
+            <Dependent Role="PetOwners">
+              <PropertyRef Name="OwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PetOwners_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="1" />
+          <End Role="PetOwners" Type="Self.PetOwner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="PetOwners">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Types">
+          <End Role="Types" Type="Self.Type" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_Pets">
+          <End Role="Pets" Type="Self.Pet" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="PetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationLimits_ResortLocations">
+          <End Role="ResortLocations" Type="Self.ResortLocation" Multiplicity="1" />
+          <End Role="ReservationLimits" Type="Self.ReservationLimit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResortLocations">
+              <PropertyRef Name="ResortLocationID" />
+            </Principal>
+            <Dependent Role="ReservationLimits">
+              <PropertyRef Name="ResortLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservationLimits_Types">
+          <End Role="Types" Type="Self.Type" Multiplicity="1" />
+          <End Role="ReservationLimits" Type="Self.ReservationLimit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Types">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="ReservationLimits">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservations_ResortLocations">
+          <End Role="ResortLocations" Type="Self.ResortLocation" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResortLocations">
+              <PropertyRef Name="ResortLocationID" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="ResortLocationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PetResortEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Owners" EntityType="Self.Owner" />
+          <EntitySet Name="PetOwners" EntityType="Self.PetOwner" />
+          <EntitySet Name="Pets" EntityType="Self.Pet" />
+          <EntitySet Name="ReservationLimits" EntityType="Self.ReservationLimit" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservation" />
+          <EntitySet Name="ResortLocations" EntityType="Self.ResortLocation" />
+          <EntitySet Name="Types" EntityType="Self.Type" />
+          <AssociationSet Name="FK_PetOwners_Owners" Association="Self.FK_PetOwners_Owners">
+            <End Role="Owners" EntitySet="Owners" />
+            <End Role="PetOwners" EntitySet="PetOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PetOwners_Pets" Association="Self.FK_PetOwners_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="PetOwners" EntitySet="PetOwners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Types" Association="Self.FK_Pets_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_Pets" Association="Self.FK_Reservations_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationLimits_ResortLocations" Association="Self.FK_ReservationLimits_ResortLocations">
+            <End Role="ResortLocations" EntitySet="ResortLocations" />
+            <End Role="ReservationLimits" EntitySet="ReservationLimits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservationLimits_Types" Association="Self.FK_ReservationLimits_Types">
+            <End Role="Types" EntitySet="Types" />
+            <End Role="ReservationLimits" EntitySet="ReservationLimits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservations_ResortLocations" Association="Self.FK_Reservations_ResortLocations">
+            <End Role="ResortLocations" EntitySet="ResortLocations" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PetResortModelStoreContainer" CdmEntityContainer="PetResortEntities">
+          <EntitySetMapping Name="Owners">
+            <EntityTypeMapping TypeName="PetResortModel.Owner">
+              <MappingFragment StoreEntitySet="Owners">
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PetOwners">
+            <EntityTypeMapping TypeName="PetResortModel.PetOwner">
+              <MappingFragment StoreEntitySet="PetOwners">
+                <ScalarProperty Name="PetOwnerID" ColumnName="PetOwnerID" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pets">
+            <EntityTypeMapping TypeName="PetResortModel.Pet">
+              <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="PetPhoto" ColumnName="PetPhoto" />
+                <ScalarProperty Name="SpecialNotes" ColumnName="SpecialNotes" />
+                <ScalarProperty Name="IsVIP" ColumnName="IsVIP" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReservationLimits">
+            <EntityTypeMapping TypeName="PetResortModel.ReservationLimit">
+              <MappingFragment StoreEntitySet="ReservationLimits">
+                <ScalarProperty Name="ReservationLimitID" ColumnName="ReservationLimitID" />
+                <ScalarProperty Name="ResortLocationID" ColumnName="ResortLocationID" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Limit" ColumnName="Limit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservations">
+            <EntityTypeMapping TypeName="PetResortModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservations">
+                <ScalarProperty Name="ReservationID" ColumnName="ReservationID" />
+                <ScalarProperty Name="ResortLocationID" ColumnName="ResortLocationID" />
+                <ScalarProperty Name="PetID" ColumnName="PetID" />
+                <ScalarProperty Name="ReservationDate" ColumnName="ReservationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResortLocations">
+            <EntityTypeMapping TypeName="PetResortModel.ResortLocation">
+              <MappingFragment StoreEntitySet="ResortLocations">
+                <ScalarProperty Name="ResortLocationID" ColumnName="ResortLocationID" />
+                <ScalarProperty Name="ResortName" ColumnName="ResortName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="PetResortModel.Type">
+              <MappingFragment StoreEntitySet="Types">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsExotic" ColumnName="IsExotic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="active">Admin</li>
+        </ol>
+    </div>
+</div>
+
+<div class="container" style="margin-left: -15px">
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/map.png" alt="map" height="300px" width="350px">
+        <h2 class="page-header">Resort Locations</h2>
+        <p>Create, Edit, Delete, or view Details of all the resort locations</p>
+        <a href="@Url.Action("Index", "ResortLocations")" class="btn btn-primary">Click Here</a>
+    </div>
+
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/limit.jpg" alt="map" height="300px" width="350px">
+        <h2 class="page-header">Limits</h2>
+        <p>Create, Edit, Delete, or view Details of each resort's limit</p>
+        <a href="@Url.Action("Index", "ReservationLimits")" class="btn btn-primary">Click Here!</a>
+    </div>
+
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/roles.jpg" alt="map" height="300px" width="350px">
+        <h2 class="page-header">Roles</h2>
+        <p>Create, Edit, Delete, or view Details of the site specific roles</p>
+        <a href="@Url.Action("Index", "RolesAdmin")" class="btn btn-primary">Click Here!</a>
+    </div>
+
+    
+    <div class="col-md-4" style="margin-top: 20px">
+        <img src="~/Content/img/Admin/customer.jpg" alt="map" height="300px" width="350px">
+
+        <h2 class="page-header">Users</h2>
+        <p>Create, Edit, Delete, or view Details of all site users</p>
+        <a href="@Url.Action("Index", "UsersAdmin")" class="btn btn-primary">Click Here!</a>
+    </div>
+    
+    <div class="col-md-4" style="margin-top: 20px">
+        <img src="~/Content/img/Admin/meerkat.jpg" alt="map" height="300px" width="350px">
+
+        <h2 class="page-header">Types</h2>
+
+        <p>Create, Edit, Delete, or view Details of all breeds and species</p>
+        <a href="@Url.Action("Index", "Types")" class="btn btn-primary">Click Here!</a>
+    </div>
+</div>

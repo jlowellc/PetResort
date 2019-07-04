@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ThePetResort.DAL.Type>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="active">Types</li>
+        </ol>
+    </div>
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsExotic)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsExotic)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TypeID })
+        </td>
+    </tr>
+}
+
+</table>

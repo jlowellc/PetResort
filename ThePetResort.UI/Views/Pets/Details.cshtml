@@ -1,0 +1,73 @@
+﻿@model ThePetResort.DAL.Pet
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <ol class="breadcrumb">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li class="active">Details</li>
+        </ol>
+    </div>
+</div>
+
+<div>
+    <h4>Pet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PetPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PetPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SpecialNotes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SpecialNotes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsVIP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsVIP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PetID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

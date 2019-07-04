@@ -1,0 +1,13 @@
+﻿@model ThePetResort.UI.Models.ExternalLoginListViewModel
+
+<h4>Use another service to log in.</h4>
+<hr />
+@using (Html.BeginForm("ExternalLogin", "Account", new {Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                    
+                </p>
+            </div>
+        }

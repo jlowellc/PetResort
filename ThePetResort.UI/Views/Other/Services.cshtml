@@ -1,0 +1,140 @@
+﻿
+@{
+	ViewBag.Title = "Services";
+}
+
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<ol class="breadcrumb">
+				<li>
+					@Html.ActionLink("Home", "Index", "Home")
+				</li>
+				<li class="active">Services</li>
+			</ol>
+		</div>
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<div class="col-lg-12">
+			<img src="~/Content/img/swimming_dogs.jpg" class="img-responsive" />
+		</div>
+	</div>
+	<!-- /.row -->
+	
+	<div class="services" style="margin-left: -70px">
+		<div class="container">
+			<h3>Petopia Services</h3>
+			<hr>
+		    <div class="col-md-6">
+		        <img src="~/Content/img/daycare/daycare1.jpg" class="img-responsive">
+		        <p>Going on vacation? Why not treat your dog to one as well? Our friendly and attentive team will do everything we can to ensure Petopia feels like a home away from home to your pup. Whether they need overnight, weekend, holiday or extended care, your pet will spend their days enjoying supervised open play with their BFFFs (best furry friends forever), and their nights enjoying restful sleep.</p>
+		    </div>
+
+		    <div class="col-md-6" >
+		        <div class="media">
+		            <ul>
+		                <li>
+		                    <div class="media-left">
+		                        <i class="fa fa-eye"></i>						
+		                    </div>
+		                    <div class="media-body">
+		                        <h4 class="media-heading">SUPERVISED PLAYROOMS</h4>
+		                        <p>Our playrooms are grouped by size, personality and play style to make sure your pet is safe and comfortable.</p>
+		                    </div>
+		                </li>
+		                <li>
+		                    <div class="media-left">
+		                        <i class="fa fa-shield"></i>						
+		                    </div>
+		                    <div class="media-body">
+		                        <h4 class="media-heading">A TEAM YOU CAN TRUST</h4>
+		                        <p>As Petopians, we’re a unique breed. Our team of dog care professionals provide a safe and fully supervised environment.</p>
+		                    </div>
+		                </li>
+		                <li>
+		                    <div class="media-left">
+		                        <i class="fa fa-users"></i>						
+		                    </div>
+		                    <div class="media-body">
+		                        <h4 class="media-heading">SOCIALIZATION</h4>
+		                        <p>Team members must complete rigorous training on dog body language and behavior.</p>
+		                    </div>
+		                </li>
+		            </ul>
+		        </div>
+		    </div>
+		</div>
+    </div>
+	
+<div class="services" style="margin-left: -80px">
+    <div class="container">
+        <div class="col-md-6">
+            <div class="media">
+                <ul>
+                    <li>
+                        <div class="media-left">
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">EXERCISE</h4>
+                            <p>Pets boarded with us will burn off any excess energy during a full day of play. They will be tired but happy when they go to bed. </p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="media-left">
+                            <i class="fa fa-cutlery"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">DIET</h4>
+                            <p>We also encourage you to bring your dog’s own food and treats. We’ll accommodate any special dietary needs your pup may have, and won’t charge extra for feeding or administering medication</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="media-left">
+                            <i class="fa fa-group"></i>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading">FAMILY</h4>
+                            <p>We’ll make sure your pet feels happy, safe and fulfilled even when you can’t be with them. Petopia will be their home away from home where they’ll enjoy their own personal space to dream big and stay happy.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <img src="~/Content/img/daycare/catdaycare1.jpg" class="img-responsive">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus interdum erat
+                libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
+                libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque
+                libero, pulvinar tincidunt leo consectetur eget. Curabitur lacinia pellentesque</p>
+        </div>
+    </div>
+</div>
+    </div>
+	
+	
+	
+	
+
+	<!-- Service Paragraphs -->
+	<div class="row">
+		<div class="col-md-8">
+			<h2 class="page-header">Information and Requirements</h2>
+				<p>Treat your pup or pups to a day full of play and fun at Petopia! We offer you a chance to give your special companion a safe and eventful day with well-qualified staff that will be there to give your pet the specialized attention he or she deserves!</p>
+				<p>Our daycare areas are the only one of their kind in Kansas City. On the warm and sunny days, the dogs play in our fenced and closely monitored play area. On the not-so-warm-and-sunny days, the dogs get to come inside and play in one of our four indoor playrooms! All four indoor playrooms are climate controlled and specifically designed to remain clean and safe.</p>
+				<p>We want to make sure that all of our pets enter a safe and happy environment. That being said, we require all pets to be currently vaccinated, neutered or spayed at the age of six months, and must complete a two part Temperament Test 48 hrs before any daycare reservations can be made.</p>
+				<p>Although dog daycare is fantastic for well-socialized dogs and cats, it is not for everyone! Older pets, pets with health issues, or pets with an aggressive history might not be suitable for the daycare environment.
+			</p>
+		</div>
+		<div class="col-md-4">
+			<h2 class="page-header">Reservations</h2>
+			<p>While we at Petopia always try to accommodate every family friend that shows up on our door step, some facilities have a max limit so that we can provide the very best care.</p>
+			<p>
+				Ready to make an reservation?
+			</p>
+			<a href="@Url.Action("Index", "Reservations")" class="btn btn-primary">Click Here!</a>
+		</div>
+	</div>
+	<!-- /.row -->

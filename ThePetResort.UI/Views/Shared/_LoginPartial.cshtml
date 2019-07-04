@@ -1,0 +1,16 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+    {
+    @Html.AntiForgeryToken()
+
+        <li>@Html.ActionLink("My Account", "Index", "Manage", null, new { title = "Manage" })</li>
+        //<li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <li>@Html.ActionLink("Log Off", "Logout", "Account")</li>
+}
+else
+{
+        <li>@Html.ActionLink("Sign up", "Register", "Account", null, new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", null, new { id = "loginLink" })</li>
+}
+
+

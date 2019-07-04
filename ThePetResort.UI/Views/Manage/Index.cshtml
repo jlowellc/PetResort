@@ -1,0 +1,83 @@
+﻿@model ThePetResort.UI.Models.IndexViewModel
+@{
+    ViewBag.Title = "Account";
+}
+
+
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div>
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                @Html.ActionLink("Home", "Index", "Home")
+
+            </li>
+            <li class="active">Your Account</li>
+        </ol>
+    </div>
+</div>
+    
+    
+<div class="container">
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/meerkat.jpg" alt="map" height="300px" width="325px">
+
+        <h2 class="page-header">Manage Pets</h2>
+
+        <p>
+            Need to add a pet? Perhaps you need to add some special care notes? Manage all your pet needs here...
+        </p>
+        <a href="@Url.Action("Index", "Pets")" class="btn btn-primary">Click Here!</a>
+    </div>
+    
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/family.jpg" alt="map" height="300px" width="325px">
+
+        <h2 class="page-header">Family Member</h2>
+
+        <p>
+            Need to add a family member? Need to update your information? Manage all your families needs here...
+        </p>
+        <a href="@Url.Action("Index", "Owners")" class="btn btn-primary">Click Here!</a>
+    </div>
+    
+    <div class="col-md-4">
+        <img src="~/Content/img/Admin/Seinfeld.jpg" alt="map" height="300px" width="325px">
+
+        <h2 class="page-header">Reservations</h2>
+
+        <p>
+            Need to see your reservations? Need to delete a reservation? Manage all your reservations here...
+        </p>
+        <a href="@Url.Action("Index", "Reservations")" class="btn btn-primary">Click Here!</a>
+    </div>
+</div>
+
+
+
+    
+    
+    
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">Change you account settings</h2>
+        </div>
+        <hr/>
+        <dl class="dl-horizontal">
+            <dt style="color: black">Password:</dt>
+            <dd>
+                [
+                @if (Model.HasPassword)
+                {
+                    @Html.ActionLink("Change your password", "ChangePassword")
+                }
+                else
+                {
+                    @Html.ActionLink("Create", "SetPassword")
+                }
+                ]
+            </dd>
+        </dl>
+    </div>
+</div>
